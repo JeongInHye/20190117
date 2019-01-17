@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderByKioskWebAPI", "Order
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBKLibrary", "OBKLibrary\OBKLibrary.csproj", "{CAFD526C-FE0E-4947-96F2-9C2910483C2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBK", "..\..\..\..\..\Desktop\obk lib\OrderByKiosk\OBK\OBK\OBK.csproj", "{FEBA1D0B-57DE-48FD-B6A8-BC825A8AB733}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CAFD526C-FE0E-4947-96F2-9C2910483C2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAFD526C-FE0E-4947-96F2-9C2910483C2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAFD526C-FE0E-4947-96F2-9C2910483C2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEBA1D0B-57DE-48FD-B6A8-BC825A8AB733}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEBA1D0B-57DE-48FD-B6A8-BC825A8AB733}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEBA1D0B-57DE-48FD-B6A8-BC825A8AB733}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEBA1D0B-57DE-48FD-B6A8-BC825A8AB733}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
