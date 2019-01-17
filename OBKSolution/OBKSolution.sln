@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderByKioskWebAPI", "OrderByKioskWebAPI\OrderByKioskWebAPI.csproj", "{53110368-F0FF-49D8-B2E5-2C8755556C95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBKLibrary", "OBKLibrary\OBKLibrary.csproj", "{CAFD526C-FE0E-4947-96F2-9C2910483C2B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{53110368-F0FF-49D8-B2E5-2C8755556C95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53110368-F0FF-49D8-B2E5-2C8755556C95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53110368-F0FF-49D8-B2E5-2C8755556C95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAFD526C-FE0E-4947-96F2-9C2910483C2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAFD526C-FE0E-4947-96F2-9C2910483C2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAFD526C-FE0E-4947-96F2-9C2910483C2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAFD526C-FE0E-4947-96F2-9C2910483C2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
