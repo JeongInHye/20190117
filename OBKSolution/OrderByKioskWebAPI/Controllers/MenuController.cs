@@ -56,7 +56,7 @@ namespace OrderByKioskWebAPI
                 hashtable.Add("_CreamYn",CreamYn);
 
                 db = new DataBase();
-                if(db.NonQuery("p_Menu_Insert",hashtable))
+                if(db.NonQuery("p_Menu_Insert",hashtable) ==1)
                 {
                     db.Close();
                     return "1";
@@ -121,7 +121,7 @@ namespace OrderByKioskWebAPI
 
                 db = new DataBase();
 
-                if(db.NonQuery("p_Menu_MenuEdit",hashtable))
+                if(db.NonQuery("p_Menu_MenuEdit",hashtable)==1)
                 {
                     db.Close();
                     return "1";
@@ -148,7 +148,7 @@ namespace OrderByKioskWebAPI
 
             db = new DataBase();
 
-            if(db.NonQuery("p_Menu_Delete",hashtable))
+            if(db.NonQuery("p_Menu_Delete",hashtable)==1)
             {
                 db.Close();
                 return "1";
