@@ -139,12 +139,13 @@ namespace ObkLibrary
                 if ("1" == resultStr)
                 {
                     //MessageBox.Show("DB 성공");
+                    return true;
                 }
                 else
                 {
                     MessageBox.Show("DB 실패");
+                    return false;
                 }
-                return true;
             }
             catch (Exception)
             {

@@ -154,7 +154,7 @@ namespace OrderByKioskWebAPI
             ht.Add("_oShot", oShot);
             ht.Add("_oCream", oCream);
             Console.WriteLine("이름->"+mName+"주문번호->"+oNum+",수량->"+oCount+",온도->"+oDegree+",사이즈->"+oSize+",샷->"+oShot+",휘핑->"+oCream);
-            if (db.NonQuery("p_Orderlist_insert", ht))
+            if (db.NonQuery("p_Orderlist_insert", ht)==1)
             {
                 db.Close();
                 return "1";
@@ -174,7 +174,7 @@ namespace OrderByKioskWebAPI
             ht = new Hashtable();
 
             ht.Add("_oNum", oNum);
-            if (db.NonQuery("p_Staff_ComYn", ht))
+            if (db.NonQuery("p_Staff_ComYn", ht)==1)
             {
                 db.Close();
                 return "1";
@@ -194,7 +194,7 @@ namespace OrderByKioskWebAPI
             ht = new Hashtable();
             ht.Add("_oNum", oNum);
 
-            if (db.NonQuery("p_Orderlist_orderYn", ht))
+            if (db.NonQuery("p_Orderlist_orderYn", ht)==1)
             {
                 db.Close();
                 return "1";
@@ -235,7 +235,7 @@ namespace OrderByKioskWebAPI
             ht = new Hashtable();
             ht.Add("_oNo", oNo);
 
-            if (db.NonQuery("p_Orderlist_deleteOrder", ht))
+            if (db.NonQuery("p_Orderlist_deleteOrder", ht)==1)
             {
                 db.Close();
                 return "1";
@@ -255,7 +255,7 @@ namespace OrderByKioskWebAPI
             ht = new Hashtable();
             ht.Add("_oNum", oNum);
 
-            if (db.NonQuery("p_Orderlist_deleteOrderAll", ht))
+            if (db.NonQuery("p_Orderlist_deleteOrderAll", ht)==1)
             {
                 db.Close();
                 return "1";

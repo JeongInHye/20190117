@@ -50,7 +50,7 @@ namespace OrderByKioskWebAPI
 
             db = new DataBase();
 
-            if(db.NonQuery("p_Staff_SoldOutAdd",hashtable))
+            if(db.NonQuery("p_Staff_SoldOutAdd",hashtable) == 1)
             {
                 db.Close();
                 return "1";
@@ -94,7 +94,7 @@ namespace OrderByKioskWebAPI
 
             db = new DataBase();
 
-            if(db.NonQuery("p_Staff_SoldOutDelete",hashtable))
+            if(db.NonQuery("p_Staff_SoldOutDelete",hashtable) == 1)
             {
                 db.Close();
                 return "1";
