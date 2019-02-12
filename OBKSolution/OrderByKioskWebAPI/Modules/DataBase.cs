@@ -122,7 +122,7 @@ namespace OrderByKioskWebAPI
             }
         }
 
-        public bool NonQuery(string sql, Hashtable ht)
+        public int NonQuery(string sql, Hashtable ht)
         {
             if (status)
             {
@@ -138,17 +138,17 @@ namespace OrderByKioskWebAPI
                         comm.Parameters.AddWithValue(data.Key.ToString(), data.Value);
                     }
                     int cnt = comm.ExecuteNonQuery();
-                    Console.WriteLine("------------------>>>>>>>>"+cnt);
-                    return true;
+                    Console.WriteLine("------------------>>>>>>>>" + cnt);
+                    return cnt;
                 }
                 catch
                 {
-                    return false;
+                    return -1;
                 }
             }
             else
             {
-                return false;
+                return -1;
             }
         }
     }
