@@ -7,6 +7,8 @@ using System.Collections;
 using System.Data.SqlClient;
 using System.IO;
 using MySql.Data.MySqlClient;
+using OrderByKioskWebAPI.Modules;
+using System.Net.NetworkInformation;
 
 namespace OrderByKioskWebAPI
 {
@@ -14,16 +16,16 @@ namespace OrderByKioskWebAPI
     [ApiController]
     public class MenuController : ControllerBase
     {
+        IPInfo ip = new IPInfo();
         DataBase db;
         Hashtable hashtable;
-        string serverUrl="http://192.168.3.50:5000";
-        
+
         [Route("Menu/add")]
         [HttpPost]
-        public ActionResult<string> Add([FromForm] string fileName,[FromForm]string fileData,[FromForm] string cNo,[FromForm] string mName,[FromForm] string mPrice,[FromForm] string mImage,[FromForm] string DegreeYn,[FromForm] string SizeYn,[FromForm] string ShotYn,[FromForm] string CreamYn)
+        public ActionResult<string> Add([FromForm] string fileName, [FromForm]string fileData, [FromForm] string cNo, [FromForm] string mName, [FromForm] string mPrice, [FromForm] string mImage, [FromForm] string DegreeYn, [FromForm] string SizeYn, [FromForm] string ShotYn, [FromForm] string CreamYn)
         {
-            string path = "/root/OrderByKioskWebAPI/wwwroot";  //System.IO.Directory.GetCurrentDirectory();
-            //path += "/root/OrderByKioskWebAPI/wwwroot";
+            string path = Directory.GetCurrentDirectory();
+            path += "//wwwroot";
 
             if (!Directory.Exists(path))
             {
@@ -37,26 +39,26 @@ namespace OrderByKioskWebAPI
                 string ext = fileName.Substring(fileName.LastIndexOf("."));
                 Guid saveName = Guid.NewGuid();
                 string fullName = saveName + ext;   // 저장되는 파일명 생성
-                string fullPath = string.Format("{0}/{1}",path,fullName);  // 전체경로 + 저장파일명 (주소) 
+                string fullPath = string.Format("{0}/{1}", path, fullName);  // 전체경로 + 저장파일명 (주소) 
                 FileInfo fileInfo = new FileInfo(fullPath);
                 FileStream fileStream = fileInfo.Create();
-                fileStream.Write(data,0,data.Length);
+                fileStream.Write(data, 0, data.Length);
                 fileStream.Close();
 
-                string url = string.Format("{0}/{1}",serverUrl,fullName);
+                string url = fullName;
 
                 hashtable = new Hashtable();
-                hashtable.Add("_cNo",cNo);
-                hashtable.Add("_mName",mName);
-                hashtable.Add("_mPrice",mPrice);
-                hashtable.Add("_mImage",url);
-                hashtable.Add("_DegreeYn",DegreeYn);
-                hashtable.Add("_SizeYn",SizeYn);
-                hashtable.Add("_ShotYn",ShotYn);
-                hashtable.Add("_CreamYn",CreamYn);
+                hashtable.Add("_cNo", cNo);
+                hashtable.Add("_mName", mName);
+                hashtable.Add("_mPrice", mPrice);
+                hashtable.Add("_mImage", url);
+                hashtable.Add("_DegreeYn", DegreeYn);
+                hashtable.Add("_SizeYn", SizeYn);
+                hashtable.Add("_ShotYn", ShotYn);
+                hashtable.Add("_CreamYn", CreamYn);
 
                 db = new DataBase();
-                if(db.NonQuery("p_Menu_Insert",hashtable))
+                if (db.NonQuery("p_Menu_Insert", hashtable))
                 {
                     db.Close();
                     return "1";
@@ -66,7 +68,6 @@ namespace OrderByKioskWebAPI
                     db.Close();
                     return "0";
                 }
-                
             }
             catch
             {
@@ -77,10 +78,10 @@ namespace OrderByKioskWebAPI
 
         [Route("Menu/menuEdeit")]
         [HttpPost]
-        public ActionResult<string> MenuEdeit([FromForm] string fileName,[FromForm]string fileData,[FromForm] string mName,[FromForm] string NewmName,[FromForm] string mPrice,[FromForm] string DegreeYn,[FromForm] string SizeYn,[FromForm] string ShotYn,[FromForm] string CreamYn)
+        public ActionResult<string> MenuEdeit([FromForm] string fileName, [FromForm]string fileData, [FromForm] string mName, [FromForm] string NewmName, [FromForm] string mPrice, [FromForm] string DegreeYn, [FromForm] string SizeYn, [FromForm] string ShotYn, [FromForm] string CreamYn)
         {
-            string path = "/root/OrderByKioskWebAPI/wwwroot";	//System.IO.Directory.GetCurrentDirectory();
-           // path += "\\wwwroot";
+            string path = Directory.GetCurrentDirectory();
+            path += "//wwwroot";
 
             if (!Directory.Exists(path))
             {
@@ -90,7 +91,7 @@ namespace OrderByKioskWebAPI
             {
                 string url;
                 // Console.WriteLine("---------->"+fileData.Length+"<--------------");
-                if (fileData.Length>80)
+                if (fileData.Length > 80)
                 {
                     string ext = fileName.Substring(fileName.LastIndexOf("."));
                     Guid saveName = Guid.NewGuid();
@@ -102,7 +103,7 @@ namespace OrderByKioskWebAPI
                     fileStream.Write(data, 0, data.Length);
                     fileStream.Close();
 
-                    url = string.Format("{0}/{1}",serverUrl, fullName);
+                    url = fullName;
                 }
                 else
                 {
@@ -110,18 +111,18 @@ namespace OrderByKioskWebAPI
                 }
 
                 hashtable = new Hashtable();
-                hashtable.Add("_mName",mName);
-                hashtable.Add("_NewmName",NewmName);
-                hashtable.Add("_mPrice",mPrice);
-                hashtable.Add("_mImage",url);
-                hashtable.Add("_DegreeYn",DegreeYn);
-                hashtable.Add("_SizeYn",SizeYn);
-                hashtable.Add("_ShotYn",ShotYn);
-                hashtable.Add("_CreamYn",CreamYn);
+                hashtable.Add("_mName", mName);
+                hashtable.Add("_NewmName", NewmName);
+                hashtable.Add("_mPrice", mPrice);
+                hashtable.Add("_mImage", url);
+                hashtable.Add("_DegreeYn", DegreeYn);
+                hashtable.Add("_SizeYn", SizeYn);
+                hashtable.Add("_ShotYn", ShotYn);
+                hashtable.Add("_CreamYn", CreamYn);
 
                 db = new DataBase();
 
-                if(db.NonQuery("p_Menu_MenuEdit",hashtable))
+                if (db.NonQuery("p_Menu_MenuEdit", hashtable))
                 {
                     db.Close();
                     return "1";
@@ -144,11 +145,11 @@ namespace OrderByKioskWebAPI
         public ActionResult<string> Delete([FromForm] string mName)
         {
             hashtable = new Hashtable();
-            hashtable.Add("_mName",mName);
+            hashtable.Add("_mName", mName);
 
             db = new DataBase();
 
-            if(db.NonQuery("p_Menu_Delete",hashtable))
+            if (db.NonQuery("p_Menu_Delete", hashtable))
             {
                 db.Close();
                 return "1";
@@ -165,33 +166,9 @@ namespace OrderByKioskWebAPI
         public ActionResult<ArrayList> NameSelect([FromForm] string cNo)
         {
             db = new DataBase();
-            hashtable = new  Hashtable();
-            hashtable.Add("_cNo",cNo);
-            MySqlDataReader sdr = db.Reader("p_Menu_NameSelect",hashtable);
-            ArrayList list = new ArrayList();
-
-            while (sdr.Read())
-            {
-                string[] arr = new string[sdr.FieldCount];
-                for (int i = 0; i < sdr.FieldCount; i++)
-                {
-                    arr[i] = sdr.GetValue(i).ToString();
-                }
-                list.Add(arr);
-            }
-            db.ReaderClose(sdr);
-            db.Close(); 
-            return list;
-        }
-
-        [Route("Menu/menuEdeitSelect")]
-        [HttpPost]
-        public ActionResult<ArrayList> MenuEdeitSelect([FromForm] string mName)
-        {
-            db = new DataBase();
-            hashtable = new  Hashtable();
-            hashtable.Add("_mName",mName);
-            MySqlDataReader sdr = db.Reader("p_Menu_MenuEdeitSelect",hashtable);
+            hashtable = new Hashtable();
+            hashtable.Add("_cNo", cNo);
+            MySqlDataReader sdr = db.Reader("p_Menu_NameSelect", hashtable);
             ArrayList list = new ArrayList();
 
             while (sdr.Read())
@@ -207,7 +184,31 @@ namespace OrderByKioskWebAPI
             db.Close();
             return list;
         }
-    
+
+        [Route("Menu/menuEdeitSelect")]
+        [HttpPost]
+        public ActionResult<ArrayList> MenuEdeitSelect([FromForm] string mName)
+        {
+            db = new DataBase();
+            hashtable = new Hashtable();
+            hashtable.Add("_mName", mName);
+            MySqlDataReader sdr = db.Reader("p_Menu_MenuEdeitSelect", hashtable);
+            ArrayList list = new ArrayList();
+
+            while (sdr.Read())
+            {
+                string[] arr = new string[sdr.FieldCount];
+                for (int i = 0; i < sdr.FieldCount; i++)
+                {
+                    arr[i] = sdr.GetValue(i).ToString();
+                }
+                list.Add(arr);
+            }
+            db.ReaderClose(sdr);
+            db.Close();
+            return list;
+        }
+
         [Route("menu/select")]
         [HttpPost]
         public ActionResult<ArrayList> Select_Menu([FromForm] string cNo)
@@ -215,8 +216,8 @@ namespace OrderByKioskWebAPI
             db = new DataBase();
 
             hashtable = new Hashtable();
-            hashtable.Add("_cNo",cNo);
-            MySqlDataReader sdr = db.Reader("p_Menu_Select",hashtable);
+            hashtable.Add("_cNo", cNo);
+            MySqlDataReader sdr = db.Reader("p_Menu_Select", hashtable);
             ArrayList list = new ArrayList();
             while (sdr.Read())
             {
@@ -239,8 +240,8 @@ namespace OrderByKioskWebAPI
             db = new DataBase();
             hashtable = new Hashtable();
 
-            hashtable.Add("_mName",mName);
-            MySqlDataReader sdr = db.Reader("p_Menu_Choice",hashtable);
+            hashtable.Add("_mName", mName);
+            MySqlDataReader sdr = db.Reader("p_Menu_Choice", hashtable);
             ArrayList list = new ArrayList();
             while (sdr.Read())
             {
@@ -263,15 +264,21 @@ namespace OrderByKioskWebAPI
             db = new DataBase();
             hashtable = new Hashtable();
 
-            hashtable.Add("_mName",mName);
-            MySqlDataReader sdr = db.Reader("p_Menu_image",hashtable);
-            string list ="";
+            IPInfo iPInfo = new IPInfo();
+            string ip = iPInfo.GetLocalIPv4(NetworkInterfaceType.Ethernet);
+
+            hashtable.Add("_mName", mName);
+            MySqlDataReader sdr = db.Reader("p_Menu_image", hashtable);
+            string list = "";
             while (sdr.Read())
             {
-                list=sdr.GetValue(0).ToString();
+                list = "http://" + ip + ":5000/" + sdr.GetValue(0).ToString();
             }
             db.ReaderClose(sdr);
             db.Close();
+
+            Console.WriteLine(list);
+
             return list;
         }
     }
